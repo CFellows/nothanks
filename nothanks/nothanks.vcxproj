@@ -87,6 +87,9 @@
     <ClInclude Include="nothanks_game.h" />
     <ClInclude Include="nothanks_player_state.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="README.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

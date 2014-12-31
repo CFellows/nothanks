@@ -2,7 +2,11 @@
 
 #include "nothanks_game.h"
 #include <vector>
+#include <random>
+#include <algorithm>
+#include <chrono>
 
+using namespace std;
 
 nothanks_game::nothanks_game(int numplayers) :
 m_numPlayers(numplayers),
@@ -33,15 +37,57 @@ void nothanks_game::Initialize()
 		m_players.push_back(p);
 	}
 
-	//add all cards to remainingCards
-	//TODO: pick cards at random
-	for (int c = nothanks_game::START_CARD + nothanks_game::NUM_CARDS_TO_REMOVE; c <= nothanks_game::END_CARD; ++c)
+	// cards are numbered nothanks_game::START_CARD to nothanks_game::END_CARD 
+	// with nothanks_game::NUM_CARDS_TO_REMOVE randomly removed
+	int numtoremove = nothanks_game::NUM_CARDS_TO_REMOVE;
+	vector<int> removed{};
+	int numcards = nothanks_game::END_CARD - nothanks_game::START_CARD;
+	
+	for (int i = 0; i < numtoremove; ++i)
 	{
-		m_remainingCards.push_back(c);
+		int r = rand() % numcards;
+
+		auto iter = std::find(removed.begin(), removed.end(), r);
+
+		if (iter == removed.end())
+		{
+			removed.push_back(r);
+		}
+		else
+		{
+			--i;
+		}
+		
 	}
 
+	std::sort(removed.begin(), removed.end());
+
+	auto iter = removed.begin();
+
+	for (int i = 0; i < numcards; i++)
+	{
+		int c = i + nothanks_game::START_CARD;
+
+		while ((iter != removed.end()) && (i == *iter))
+		{
+			++i;
+			++iter;
+		}
+
+		if (i < numcards)
+		{
+			c = i + nothanks_game::START_CARD;
+			m_remainingCards.push_back(c);
+		}
+	}
+
+	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+
+	shuffle(m_remainingCards.begin(), m_remainingCards.end(), std::default_random_engine(seed));
+
+	//TODO: Should use pointers here.
 	//pop a card off remainingcards
-	m_CurrentCard = m_remainingCards.front(); //TODO: is this the right method?
+	m_CurrentCard = m_remainingCards.front();
 	m_remainingCards.pop_front();
 	//pop a player off players
 	m_currentPlayer = m_players.front();
