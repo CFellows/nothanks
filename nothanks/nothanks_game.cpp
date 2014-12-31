@@ -81,7 +81,7 @@ void nothanks_game::Initialize()
 		}
 	}
 
-	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+	unsigned int seed = static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count());
 
 	shuffle(m_remainingCards.begin(), m_remainingCards.end(), std::default_random_engine(seed));
 

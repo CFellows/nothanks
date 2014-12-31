@@ -7,3 +7,11 @@ public:
 
 	void Move(nothanks_game &game);
 };
+
+class smarterbot : public nothanks_bot
+{
+public:
+	smarterbot();
+
+	void Move(nothanks_game &game);
+};

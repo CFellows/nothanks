@@ -27,6 +27,9 @@
     <ClCompile Include="randombot.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="smarterbotcpp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="nothanks_game.h">

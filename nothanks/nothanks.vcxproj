@@ -80,6 +80,7 @@
     <ClCompile Include="nothanks_game.cpp" />
     <ClCompile Include="nothanks_player_state.cpp" />
     <ClCompile Include="randombot.cpp" />
+    <ClCompile Include="smarterbotcpp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bots.h" />
